@@ -20,7 +20,7 @@ export const PROJECTS = [
     {
         title: "AgentRecon",
         description: "Modular AI-powered reconnaissance pipeline automating tools like Nmap, Nikto, and Gobuster. Features AI-driven false positive filtering and CVE enrichment.",
-        image: "/agent-recon.png", 
+        image: "/sid-portfolio/agent-recon.png",
         tags: ["Python", "AI", "Nmap", "Automation"],
         link: "https://github.com/sid1125/AgentRecon",
         linkText: "View Code"
@@ -28,7 +28,7 @@ export const PROJECTS = [
     {
         title: "Dr FUSED",
         description: "Modular Discord bot with moderation, logging, and interactive commands. Implements role-based access control and secure API practices.",
-        image: "/Screenshot_18.png",
+        image: "/sid-portfolio/Screenshot_18.png",
         tags: ["Node.js", "MongoDB", "Discord.js", "Security"],
         link: "https://github.com/sid1125/discord-bot",
         linkText: "View Code"
@@ -36,7 +36,7 @@ export const PROJECTS = [
     {
         title: "Embrizon VAPT",
         description: "Comprehensive vulnerability assessment and security auditing. Identified web vulnerabilities and prepared structured VAPT reports.",
-        image: "/Screenshot_30.png",
+        image: "/sid-portfolio/Screenshot_30.png",
         tags: ["Burp Suite", "Nmap", "Wireshark", "Auditing"],
         link: "/Embrizon_Project-Vulnerability_Assessment_Report-Siddharth Sinha.pdf",
         linkText: "View Report"
@@ -44,7 +44,7 @@ export const PROJECTS = [
     {
         title: "LMS",
         description: "Python & MySQL-based Library Management System. Handles book tracking, issuing, and returns with a focus on database efficiency.",
-        image: "/Screenshot_24.png",
+        image: "/sid-portfolio/Screenshot_24.png",
         tags: ["Python", "MySQL", "Database Design"],
         link: "https://github.com/sid1125/Library-Management-System",
         linkText: "View Code"
@@ -78,7 +78,7 @@ export const EXPERIENCE = [
     {
         title: "Cyber Security Intern",
         company: "National Informatics Centre (MeitY)",
-        period: "Jun 2025 - Jul 2025", 
+        period: "Jun 2025 - Jul 2025",
         description: "Conducted vulnerability assessments and security auditing of government applications. Analyzed risk impact and prepared VAPT reports aligned with organizational standards."
     },
     {
