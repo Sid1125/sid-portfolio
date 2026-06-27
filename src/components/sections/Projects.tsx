@@ -36,13 +36,23 @@ export const Projects = () => {
                         >
                             <Card className="group bg-zinc-950 border-white/5 overflow-hidden hover:border-primary/30 transition-all duration-300 flex flex-col h-full rounded-2xl">
                                 <div className="relative aspect-video overflow-hidden">
-                                    <Image
-                                        src={project.image}
-                                        alt={project.title}
-                                        fill
-                                        className="object-cover transition-transform duration-500 group-hover:scale-110"
-                                    />
-                                    <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors" />
+                                    {project.image ? (
+                                        <>
+                                            <Image
+                                                src={project.image}
+                                                alt={project.title}
+                                                fill
+                                                className="object-cover transition-transform duration-500 group-hover:scale-110"
+                                            />
+                                            <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors" />
+                                        </>
+                                    ) : (
+                                        <div className="w-full h-full bg-gradient-to-br from-zinc-800 via-zinc-900 to-black flex items-center justify-center">
+                                            <span className="text-6xl font-heading font-bold text-zinc-700/50 select-none">
+                                                {project.title.charAt(0)}
+                                            </span>
+                                        </div>
+                                    )}
                                 </div>
 
                                 <div className="p-8 flex flex-col flex-1">

@@ -47,8 +47,8 @@ export default function Home() {
             {/* Right Side: Description & CTAs */}
             <div className="lg:col-span-4 lg:pb-12 lg:pr-20">
               <p className="text-xl md:text-2xl text-zinc-400 leading-[1.5] font-sans mb-10 opacity-80 lg:text-right">
-                Software Engineer specializing in clean, premium, <br className="hidden xl:block" />
-                and performant web applications that leave an impact.
+                Cybersecurity & Full-Stack Developer focused on <br className="hidden xl:block" />
+                secure, performant, and intelligent digital systems.
               </p>
 
               <div className="flex flex-wrap items-center gap-8 lg:justify-end mb-4">

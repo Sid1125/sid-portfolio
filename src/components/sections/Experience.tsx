@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { EXPERIENCE, EDUCATION, ACHIEVEMENTS, CERTIFICATIONS } from "@/constants";
+import { EXPERIENCE, EDUCATION, ACHIEVEMENTS, CERTIFICATIONS, LANGUAGES } from "@/constants";
 import { motion } from "framer-motion";
 
 export const Experience = () => {
@@ -84,7 +84,7 @@ export const Experience = () => {
                 <div className="max-w-6xl mx-auto">
                     <h3 className="text-3xl font-heading font-bold mb-12 text-center">Achievements & Certifications</h3>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                         {/* Achievements */}
                         <div className="bg-white/5 border border-white/10 rounded-2xl p-8 hover:bg-white/10 transition-colors">
                             <h4 className="text-xl font-heading font-bold mb-6 text-primary flex items-center gap-2">
@@ -119,6 +119,21 @@ export const Experience = () => {
                                         {cert.link !== "#" && (
                                             <a href={cert.link} target="_blank" rel="noopener noreferrer" className="text-primary text-xs hover:underline">View Certificate →</a>
                                         )}
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* Languages */}
+                        <div className="bg-white/5 border border-white/10 rounded-2xl p-8 hover:bg-white/10 transition-colors">
+                            <h4 className="text-xl font-heading font-bold mb-6 text-primary flex items-center gap-2">
+                                Languages
+                            </h4>
+                            <div className="space-y-6">
+                                {LANGUAGES.map((lang, index) => (
+                                    <div key={index} className="border-b border-white/10 last:border-0 pb-4 last:pb-0">
+                                        <h5 className="font-bold text-white mb-1">{lang.language}</h5>
+                                        <p className="text-zinc-400 text-sm">{lang.proficiency}</p>
                                     </div>
                                 ))}
                             </div>
