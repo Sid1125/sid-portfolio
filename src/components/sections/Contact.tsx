@@ -3,7 +3,71 @@
 import React, { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
 import { SOCIALS } from "@/constants";
-import { Mail, MapPin, Github, Linkedin, Send, Loader2, Download, Terminal } from "lucide-react";
+import { Mail, MapPin, Github, Linkedin, Send, Loader2, Download, Terminal, ArrowUpRight } from "lucide-react";
+import { motion } from "framer-motion";
+import { ParticleGrid } from "@/components/ui/particle-grid";
+
+const MagneticAnchor = ({ children, className, ...props }: React.ComponentPropsWithoutRef<"a"> & { children: React.ReactNode }) => {
+    const ref = useRef<HTMLAnchorElement>(null);
+    const [pos, setPos] = useState({ x: 0, y: 0 });
+
+    const handleMouseMove = (e: React.MouseEvent) => {
+        if (!ref.current) return;
+        const rect = ref.current.getBoundingClientRect();
+        const x = (e.clientX - rect.left - rect.width / 2) * 0.3;
+        const y = (e.clientY - rect.top - rect.height / 2) * 0.3;
+        setPos({ x, y });
+    };
+
+    const handleMouseLeave = () => setPos({ x: 0, y: 0 });
+
+    return (
+        <a
+            ref={ref}
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+            className={className}
+            style={{
+                transform: `translate(${pos.x}px, ${pos.y}px)`,
+                transition: pos.x === 0 && pos.y === 0 ? "transform 0.3s ease" : "none",
+            }}
+            {...props}
+        >
+            {children}
+        </a>
+    );
+};
+
+const MagneticButton = ({ children, className, ...props }: React.ComponentPropsWithoutRef<"button"> & { children: React.ReactNode }) => {
+    const ref = useRef<HTMLButtonElement>(null);
+    const [pos, setPos] = useState({ x: 0, y: 0 });
+
+    const handleMouseMove = (e: React.MouseEvent) => {
+        if (!ref.current) return;
+        const rect = ref.current.getBoundingClientRect();
+        const x = (e.clientX - rect.left - rect.width / 2) * 0.3;
+        const y = (e.clientY - rect.top - rect.height / 2) * 0.3;
+        setPos({ x, y });
+    };
+
+    const handleMouseLeave = () => setPos({ x: 0, y: 0 });
+
+    return (
+        <button
+            ref={ref}
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+            className={className}
+            style={{
+                transform: `translate(${pos.x}px, ${pos.y}px)`,
+                transition: pos.x === 0 && pos.y === 0 ? "transform 0.3s ease" : "none",
+            }}
+            {...props}
+        >
+            {children}
+        </button>
+    );
+};
 
 export const Contact = () => {
     const formRef = useRef<HTMLFormElement>(null);
@@ -38,139 +102,229 @@ export const Contact = () => {
     };
 
     return (
-        <section id="contact" className="py-20 bg-black relative">
-            <div className="container mx-auto px-6">
-                <div className="flex items-center gap-4 mb-16">
-                    <h2 className="text-3xl md:text-5xl font-heading font-bold">
-                        Get In <span className="text-primary">Touch</span>
+        <section id="contact" className="py-32 bg-black relative overflow-hidden">
+            <ParticleGrid />
+            <div
+                className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent"
+            />
+            <div className="container mx-auto px-6 relative z-10">
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8 }}
+                    viewport={{ once: true }}
+                    className="text-center mb-20"
+                >
+                    <span className="text-[11px] uppercase tracking-[0.3em] text-zinc-500 font-mono mb-5 block">
+                        // 04
+                    </span>
+                    <h2 className="text-4xl md:text-7xl font-heading font-bold tracking-tighter leading-[0.9]">
+                        Get In <br className="md:hidden" />
+                        <span className="text-primary italic">Touch</span>
                     </h2>
-                    <div className="h-px flex-1 bg-white/10"></div>
-                </div>
+                    <div className="w-8 h-[1.5px] bg-primary/60 mx-auto mt-6 mb-6" />
+                    <p className="text-zinc-500 max-w-xl mx-auto font-sans text-sm leading-relaxed">
+                        Have a project in mind or just want to connect? I&apos;m always open to new opportunities.
+                    </p>
+                </motion.div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
+                <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 max-w-5xl mx-auto">
                     {/* Contact Info */}
-                    <div>
-                        <h3 className="text-2xl font-bold mb-6">Let&apos;s Connect</h3>
-                        <p className="text-zinc-400 mb-8 leading-relaxed">
-                            I&apos;m always open to discussing new projects, creative ideas, or opportunities in cybersecurity and web development.
-                        </p>
+                    <motion.div
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.6 }}
+                        viewport={{ once: true }}
+                        className="lg:col-span-2"
+                    >
+                        <div className="bg-zinc-900/20 backdrop-blur-sm border border-white/5 rounded-2xl p-8 h-full">
+                            <h3 className="text-lg font-heading font-bold mb-4">Let&apos;s Connect</h3>
+                            <p className="text-zinc-500 text-sm leading-relaxed mb-8">
+                                I&apos;m always open to discussing new projects, creative ideas, or opportunities in cybersecurity and web development.
+                            </p>
 
-                        <div className="space-y-6 mb-10">
-                            <a href={SOCIALS.email} className="flex items-center gap-4 text-zinc-300 hover:text-primary transition-colors group">
-                                <div className="p-3 bg-zinc-900 rounded-full border border-white/10 group-hover:border-primary/50 transition-colors">
-                                    <Mail size={20} />
+                            <div className="space-y-5 mb-8">
+                                <a href={SOCIALS.email} className="flex items-center gap-3.5 text-zinc-400 hover:text-primary transition-colors group">
+                                    <div className="w-9 h-9 bg-zinc-800/50 rounded-lg border border-white/5 flex items-center justify-center group-hover:border-primary/30 group-hover:bg-primary/[0.08] transition-all">
+                                        <Mail size={15} />
+                                    </div>
+                                    <span className="text-sm">siddharthsinha1125@gmail.com</span>
+                                </a>
+                                <div className="flex items-center gap-3.5 text-zinc-400">
+                                    <div className="w-9 h-9 bg-zinc-800/50 rounded-lg border border-white/5 flex items-center justify-center">
+                                        <MapPin size={15} />
+                                    </div>
+                                    <span className="text-sm">New Delhi, India</span>
                                 </div>
-                                <span>siddharthsinha1125@gmail.com</span>
-                            </a>
-                            <div className="flex items-center gap-4 text-zinc-300">
-                                <div className="p-3 bg-zinc-900 rounded-full border border-white/10">
-                                    <MapPin size={20} />
-                                </div>
-                                <span>New Delhi, India</span>
                             </div>
-                        </div>
 
-                        <div className="flex gap-4 mb-12">
-                            <a href={SOCIALS.github} target="_blank" rel="noopener noreferrer" className="p-3 bg-zinc-900 rounded-full border border-white/10 hover:border-primary/50 text-zinc-400 hover:text-white transition-all transform hover:-translate-y-1">
-                                <Github size={20} />
-                            </a>
-                            <a href={SOCIALS.linkedin} target="_blank" rel="noopener noreferrer" className="p-3 bg-zinc-900 rounded-full border border-white/10 hover:border-primary/50 text-zinc-400 hover:text-white transition-all transform hover:-translate-y-1">
-                                <Linkedin size={20} />
-                            </a>
-                            <a href={SOCIALS.tryhackme} target="_blank" rel="noopener noreferrer" className="p-3 bg-zinc-900 rounded-full border border-white/10 hover:border-primary/50 text-zinc-400 hover:text-white transition-all transform hover:-translate-y-1" title="TryHackMe">
-                                <Terminal size={20} />
-                            </a>
-                        </div>
+                            <div className="flex gap-3 mb-10">
+                                {[
+                                    { href: SOCIALS.github, icon: Github, label: "GitHub" },
+                                    { href: SOCIALS.linkedin, icon: Linkedin, label: "LinkedIn" },
+                                    { href: SOCIALS.tryhackme, icon: Terminal, label: "TryHackMe" },
+                                ].map(({ href, icon: Icon, label }) => (
+                                    <a
+                                        key={label}
+                                        href={href}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        title={label}
+                                        className="w-9 h-9 bg-zinc-800/50 rounded-lg border border-white/5 flex items-center justify-center text-zinc-400 hover:text-white hover:border-primary/30 hover:bg-primary/[0.08] hover:-translate-y-0.5 transition-all duration-300"
+                                    >
+                                        <Icon size={15} />
+                                    </a>
+                                ))}
+                            </div>
 
-                        <a
-                            href={SOCIALS.cv}
-                            download
-                            className="inline-flex items-center gap-2 px-8 py-4 bg-primary text-primary-foreground rounded-full font-bold hover:opacity-90 transition-all active:scale-95"
-                        >
-                            <Download size={20} />
-                            Download CV
-                        </a>
-                    </div>
+                            <MagneticAnchor
+                                href={SOCIALS.cv}
+                                download
+                                className="inline-flex items-center gap-2 px-6 py-3 bg-primary/90 text-white text-sm font-medium rounded-full hover:bg-primary transition-all active:scale-95 cursor-pointer"
+                            >
+                                <Download size={14} />
+                                Download CV
+                            </MagneticAnchor>
+                        </div>
+                    </motion.div>
 
                     {/* Contact Form */}
-                    <div className="bg-zinc-900/30 p-8 rounded-2xl border border-white/10 backdrop-blur-sm">
-                        <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <div className="space-y-2">
-                                    <label htmlFor="from_name" className="text-sm text-zinc-500 font-medium">Name</label>
-                                    <input
-                                        type="text"
+                    <motion.div
+                        initial={{ opacity: 0, x: 20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.6 }}
+                        viewport={{ once: true }}
+                        className="lg:col-span-3"
+                    >
+                        <div className="bg-zinc-900/20 backdrop-blur-sm p-8 rounded-2xl border border-white/5">
+                            <form ref={formRef} onSubmit={handleSubmit} className="space-y-5">
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                    <InputField
+                                        label="Name"
                                         name="from_name"
+                                        type="text"
                                         required
-                                        className="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:border-primary outline-none transition-colors"
                                         placeholder="John Doe"
                                     />
-                                </div>
-                                <div className="space-y-2">
-                                    <label htmlFor="from_email" className="text-sm text-zinc-500 font-medium">Email</label>
-                                    <input
-                                        type="email"
+                                    <InputField
+                                        label="Email"
                                         name="from_email"
+                                        type="email"
                                         required
-                                        className="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:border-primary outline-none transition-colors"
                                         placeholder="john@example.com"
                                     />
                                 </div>
-                            </div>
 
-                            <div className="space-y-2">
-                                <label htmlFor="subject" className="text-sm text-zinc-500 font-medium">Subject</label>
-                                <input
-                                    type="text"
+                                <InputField
+                                    label="Subject"
                                     name="subject"
+                                    type="text"
                                     required
-                                    className="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:border-primary outline-none transition-colors"
                                     placeholder="Project Inquiry"
                                 />
-                            </div>
 
-                            <div className="space-y-2">
-                                <label htmlFor="message" className="text-sm text-zinc-500 font-medium">Message</label>
-                                <textarea
+                                <TextAreaField
+                                    label="Message"
                                     name="message"
                                     required
-                                    rows={5}
-                                    className="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:border-primary outline-none transition-colors resize-none"
+                                    rows={4}
                                     placeholder="Tell me about your project..."
-                                ></textarea>
-                            </div>
+                                />
 
-                            <button
-                                type="submit"
-                                disabled={loading}
-                                className="w-full bg-white text-black font-bold py-4 rounded-lg hover:bg-zinc-200 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-                            >
-                                {loading ? (
-                                    <>
-                                        <Loader2 size={20} className="animate-spin" /> Sending...
-                                    </>
-                                ) : (
-                                    <>
-                                        Send Message <Send size={20} />
-                                    </>
+                                <MagneticButton
+                                    type="submit"
+                                    disabled={loading}
+                                    className="w-full bg-white text-black font-medium py-3.5 rounded-xl hover:bg-zinc-100 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 cursor-pointer text-sm"
+                                >
+                                    {loading ? (
+                                        <>
+                                            <Loader2 size={15} className="animate-spin" /> Sending...
+                                        </>
+                                    ) : (
+                                        <>
+                                            Send Message <ArrowUpRight size={15} />
+                                        </>
+                                    )}
+                                </MagneticButton>
+
+                                {status === "success" && (
+                                    <motion.div
+                                        initial={{ opacity: 0, y: 10 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        className="p-3.5 bg-green-500/5 border border-green-500/10 text-green-400 rounded-xl text-xs text-center"
+                                    >
+                                        Message sent successfully! I&apos;ll get back to you soon.
+                                    </motion.div>
                                 )}
-                            </button>
 
-                            {status === "success" && (
-                                <div className="p-4 bg-green-500/10 border border-green-500/20 text-green-500 rounded-lg text-sm text-center">
-                                    Message sent successfully! I&apos;ll get back to you soon.
-                                </div>
-                            )}
-
-                            {status === "error" && (
-                                <div className="p-4 bg-red-500/10 border border-red-500/20 text-red-500 rounded-lg text-sm text-center">
-                                    Something went wrong. Please try again later.
-                                </div>
-                            )}
-                        </form>
-                    </div>
+                                {status === "error" && (
+                                    <motion.div
+                                        initial={{ opacity: 0, y: 10 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        className="p-3.5 bg-red-500/5 border border-red-500/10 text-red-400 rounded-xl text-xs text-center"
+                                    >
+                                        Something went wrong. Please try again later.
+                                    </motion.div>
+                                )}
+                            </form>
+                        </div>
+                    </motion.div>
                 </div>
             </div>
         </section>
+    );
+};
+
+const InputField = ({ label, ...props }: React.ComponentPropsWithoutRef<"input"> & { label: string }) => {
+    const [focused, setFocused] = useState(false);
+
+    return (
+        <div className="space-y-1.5 relative">
+            <label className="text-[11px] font-medium text-zinc-500 uppercase tracking-wider">{label}</label>
+            <div className="relative">
+                <div
+                    className={`absolute inset-0 rounded-xl transition-opacity duration-300 pointer-events-none ${
+                        focused ? "opacity-100" : "opacity-0"
+                    }`}
+                    style={{
+                        background: "radial-gradient(ellipse at center, rgba(255,0,0,0.06), transparent 70%)",
+                        filter: "blur(4px)",
+                    }}
+                />
+                <input
+                    {...props}
+                    onFocus={(e) => { setFocused(true); props.onFocus?.(e); }}
+                    onBlur={(e) => { setFocused(false); props.onBlur?.(e); }}
+                    className="w-full bg-black/40 border border-white/[0.06] rounded-xl px-4 py-3 text-white text-sm placeholder:text-zinc-600 focus:border-primary/40 outline-none transition-all duration-300 relative z-10"
+                />
+            </div>
+        </div>
+    );
+};
+
+const TextAreaField = ({ label, ...props }: React.ComponentPropsWithoutRef<"textarea"> & { label: string }) => {
+    const [focused, setFocused] = useState(false);
+
+    return (
+        <div className="space-y-1.5 relative">
+            <label className="text-[11px] font-medium text-zinc-500 uppercase tracking-wider">{label}</label>
+            <div className="relative">
+                <div
+                    className={`absolute inset-0 rounded-xl transition-opacity duration-300 pointer-events-none ${
+                        focused ? "opacity-100" : "opacity-0"
+                    }`}
+                    style={{
+                        background: "radial-gradient(ellipse at center, rgba(255,0,0,0.06), transparent 70%)",
+                        filter: "blur(4px)",
+                    }}
+                />
+                <textarea
+                    {...props}
+                    onFocus={(e) => { setFocused(true); props.onFocus?.(e); }}
+                    onBlur={(e) => { setFocused(false); props.onBlur?.(e); }}
+                    className="w-full bg-black/40 border border-white/[0.06] rounded-xl px-4 py-3 text-white text-sm placeholder:text-zinc-600 focus:border-primary/40 outline-none transition-all duration-300 resize-none relative z-10"
+                />
+            </div>
+        </div>
     );
 };
