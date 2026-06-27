@@ -1,0 +1,2 @@
+:HL["/sid-portfolio/_next/static/chunks/62d2585312ebc262.css","style"]
+0:{"buildId":"Q1aW2NxU-Jc14-GgjLj77","tree":{"name":"","paramType":null,"paramKey":"","hasRuntimePrefetch":false,"slots":{"children":{"name":"/_not-found","paramType":null,"paramKey":"/_not-found","hasRuntimePrefetch":false,"slots":{"children":{"name":"__PAGE__","paramType":null,"paramKey":"__PAGE__","hasRuntimePrefetch":false,"slots":null,"isRootLayout":false}},"isRootLayout":false}},"isRootLayout":true},"staleTime":300}
