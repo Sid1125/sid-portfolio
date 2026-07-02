@@ -89,7 +89,6 @@ const ProjectCard = ({ project, index, onSelect }: {
 }) => {
     const cardRef = useRef<HTMLDivElement>(null);
     const glowRef = useRef<HTMLDivElement>(null);
-    const tiltRef = useRef<HTMLDivElement>(null);
 
     const handleMouseMove = useCallback((e: React.MouseEvent) => {
         const el = e.currentTarget as HTMLElement;
@@ -102,20 +101,11 @@ const ProjectCard = ({ project, index, onSelect }: {
         entry.x = ((e.clientX - rect.left) / rect.width) * 100;
         entry.y = ((e.clientY - rect.top) / rect.height) * 100;
 
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-        const rx = ((e.clientY - rect.top - centerY) / centerY) * -8;
-        const ry = ((e.clientX - rect.left - centerX) / centerX) * 8;
-
         if (entry.raf) cancelAnimationFrame(entry.raf);
         entry.raf = requestAnimationFrame(() => {
             if (glowRef.current) {
                 glowRef.current.style.setProperty("--gx", `${entry!.x}%`);
                 glowRef.current.style.setProperty("--gy", `${entry!.y}%`);
-            }
-            if (tiltRef.current) {
-                tiltRef.current.style.setProperty("--rx", `${rx}deg`);
-                tiltRef.current.style.setProperty("--ry", `${ry}deg`);
             }
         });
     }, []);
@@ -125,10 +115,6 @@ const ProjectCard = ({ project, index, onSelect }: {
         if (!el) return;
         const entry = glowCache.get(el);
         if (entry && entry.raf) cancelAnimationFrame(entry.raf);
-        if (tiltRef.current) {
-            tiltRef.current.style.setProperty("--rx", "0deg");
-            tiltRef.current.style.setProperty("--ry", "0deg");
-        }
     }, []);
 
     return (
@@ -140,7 +126,6 @@ const ProjectCard = ({ project, index, onSelect }: {
             viewport={{ once: true }}
         >
             <div
-                ref={(node) => { tiltRef.current = node as HTMLDivElement | null; }}
                 onMouseMove={handleMouseMove}
                 onMouseLeave={handleMouseLeave}
                 onClick={onSelect}
@@ -149,10 +134,6 @@ const ProjectCard = ({ project, index, onSelect }: {
                 tabIndex={0}
                 aria-label={`View details for ${project.title}`}
                 className="relative group cursor-pointer"
-                style={{
-                    transform: "perspective(1000px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg))",
-                    transition: "transform 0.3s ease",
-                }}
             >
                 <div
                     className="absolute -inset-[1px] rounded-2xl bg-gradient-to-b from-white/5 via-white/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
