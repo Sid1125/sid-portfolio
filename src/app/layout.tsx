@@ -13,6 +13,8 @@ const outfit = Outfit({
 });
 
 const baseUrl = "https://sid1125.github.io/sid-portfolio";
+const isProd = process.env.NODE_ENV === "production";
+const assetPfx = isProd ? "/sid-portfolio" : "";
 
 export const metadata: Metadata = {
   title: "Siddharth Sinha - Full Stack Developer & Software Engineer",
@@ -27,7 +29,7 @@ export const metadata: Metadata = {
     siteName: "Siddharth Sinha",
     images: [
       {
-        url: "/agent-recon.png",
+        url: `${baseUrl}/agent-recon.png`,
         width: 1200,
         height: 630,
         alt: "Siddharth Sinha — Portfolio",
@@ -41,12 +43,12 @@ export const metadata: Metadata = {
     title: "Siddharth Sinha - Full Stack Developer & Software Engineer",
     description:
       "Computer Science undergraduate focused on cybersecurity, digital forensics, and AI-enabled full-stack systems.",
-    images: ["/agent-recon.png"],
+    images: [`${baseUrl}/agent-recon.png`],
   },
   icons: {
-    icon: "/favicon.svg",
-    shortcut: "/favicon.svg",
-    apple: "/favicon.svg",
+    icon: `${assetPfx}/favicon.svg`,
+    shortcut: `${assetPfx}/favicon.svg`,
+    apple: `${assetPfx}/favicon.svg`,
   },
 };
 

@@ -18,7 +18,7 @@ export default function Home() {
           backgroundSize: "40px 40px",
         }} />
         {/* Immersive Background Animation with Clipping */}
-        <div className="absolute inset-x-0 top-0 bottom-20 z-0 overflow-hidden pointer-events-none will-change-transform">
+        <div className="absolute inset-x-0 top-0 bottom-20 z-0 overflow-hidden pointer-events-none will-change-transform bg-gradient-to-b from-zinc-950 via-black to-black">
           <UnicornStudio
             projectId="cmbQxPyy8Ts7q2LBBDz1"
             className="w-full h-full object-cover scale-[1.15] translate-y-[-3%]"

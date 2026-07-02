@@ -35,19 +35,25 @@ export const UnicornStudio = ({ projectId, className, style }: UnicornStudioProp
             }
         };
 
-        if (!window.UnicornStudio) {
-            window.UnicornStudio = { isInitialized: false, init: () => { } };
-            const script = document.createElement("script");
-            script.src = "https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v2.0.2/dist/unicornStudio.umd.js";
-            script.async = true; // Optimize loading
-            script.onload = () => {
-                // Small delay to ensure heavy initial rendering doesn't block main thread immediately
-                setTimeout(() => {
-                    initStudio();
-                    window.UnicornStudio.isInitialized = true;
-                }, 100);
-            };
-            (document.head || document.body).appendChild(script);
+            if (!window.UnicornStudio) {
+                window.UnicornStudio = { isInitialized: false, init: () => { } };
+                const script = document.createElement("script");
+                script.src = "https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v2.2.6/dist/unicornStudio.umd.js";
+                script.async = true;
+                script.onload = () => {
+                    setTimeout(() => {
+                        try {
+                            initStudio();
+                            window.UnicornStudio.isInitialized = true;
+                        } catch (e) {
+                            console.error("UnicornStudio init failed:", e);
+                        }
+                    }, 100);
+                };
+                script.onerror = () => {
+                    console.error("UnicornStudio script failed to load from CDN");
+                };
+                (document.head || document.body).appendChild(script);
         } else {
             initStudio();
         }
