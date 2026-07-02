@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState, useCallback } from "react";
+import React, { useRef, useState, useCallback, useEffect } from "react";
 import emailjs from "@emailjs/browser";
 import { SOCIALS } from "@/constants";
 import { Mail, MapPin, Github, Linkedin, Send, Loader2, Download, Terminal, ArrowUpRight } from "lucide-react";
@@ -71,6 +71,8 @@ export const Contact = () => {
     const formRef = useRef<HTMLFormElement>(null);
     const [loading, setLoading] = useState(false);
     const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
+    const [mounted, setMounted] = useState(false);
+    useEffect(() => { setMounted(true); }, []);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -82,7 +84,7 @@ export const Contact = () => {
         try {
             await emailjs.sendForm(
                 "service_eejqq7p",
-                "template_vvvgpbh",
+                "template_xoxeyoc",
                 formRef.current,
                 "fBJaEm5XPoetPnNuH"
             );
@@ -195,76 +197,88 @@ export const Contact = () => {
                         className="lg:col-span-3"
                     >
                         <div className="bg-zinc-900/20 backdrop-blur-sm p-8 rounded-2xl border border-white/5">
-                            <form ref={formRef} onSubmit={handleSubmit} className="space-y-5" suppressHydrationWarning>
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                            {mounted ? (
+                                <form ref={formRef} onSubmit={handleSubmit} className="space-y-5">
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                        <InputField
+                                            label="Name"
+                                            name="from_name"
+                                            type="text"
+                                            required
+                                            placeholder="John Doe"
+                                        />
+                                        <InputField
+                                            label="Email"
+                                            name="from_email"
+                                            type="email"
+                                            required
+                                            placeholder="john@example.com"
+                                        />
+                                    </div>
+
                                     <InputField
-                                        label="Name"
-                                        name="from_name"
+                                        label="Subject"
+                                        name="subject"
                                         type="text"
                                         required
-                                        placeholder="John Doe"
+                                        placeholder="Project Inquiry"
                                     />
-                                    <InputField
-                                        label="Email"
-                                        name="from_email"
-                                        type="email"
+
+                                    <TextAreaField
+                                        label="Message"
+                                        name="message"
                                         required
-                                        placeholder="john@example.com"
+                                        rows={4}
+                                        placeholder="Tell me about your project..."
                                     />
-                                </div>
 
-                                <InputField
-                                    label="Subject"
-                                    name="subject"
-                                    type="text"
-                                    required
-                                    placeholder="Project Inquiry"
-                                />
+                                    <MagneticButton
+                                        type="submit"
+                                        disabled={loading}
+                                        className="w-full bg-white text-black font-medium py-3.5 rounded-xl hover:bg-zinc-100 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 cursor-pointer text-sm"
+                                    >
+                                        {loading ? (
+                                            <>
+                                                <Loader2 size={15} className="animate-spin" /> Sending...
+                                            </>
+                                        ) : (
+                                            <>
+                                                Send Message <ArrowUpRight size={15} />
+                                            </>
+                                        )}
+                                    </MagneticButton>
 
-                                <TextAreaField
-                                    label="Message"
-                                    name="message"
-                                    required
-                                    rows={4}
-                                    placeholder="Tell me about your project..."
-                                />
-
-                                <MagneticButton
-                                    type="submit"
-                                    disabled={loading}
-                                    className="w-full bg-white text-black font-medium py-3.5 rounded-xl hover:bg-zinc-100 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 cursor-pointer text-sm"
-                                >
-                                    {loading ? (
-                                        <>
-                                            <Loader2 size={15} className="animate-spin" /> Sending...
-                                        </>
-                                    ) : (
-                                        <>
-                                            Send Message <ArrowUpRight size={15} />
-                                        </>
+                                    {status === "success" && (
+                                        <motion.div
+                                            initial={{ opacity: 0, y: 10 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            className="p-3.5 bg-green-500/5 border border-green-500/10 text-green-400 rounded-xl text-xs text-center"
+                                        >
+                                            Message sent successfully! I&apos;ll get back to you soon.
+                                        </motion.div>
                                     )}
-                                </MagneticButton>
 
-                                {status === "success" && (
-                                    <motion.div
-                                        initial={{ opacity: 0, y: 10 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        className="p-3.5 bg-green-500/5 border border-green-500/10 text-green-400 rounded-xl text-xs text-center"
-                                    >
-                                        Message sent successfully! I&apos;ll get back to you soon.
-                                    </motion.div>
-                                )}
-
-                                {status === "error" && (
-                                    <motion.div
-                                        initial={{ opacity: 0, y: 10 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        className="p-3.5 bg-red-500/5 border border-red-500/10 text-red-400 rounded-xl text-xs text-center"
-                                    >
-                                        Something went wrong. Please try again later.
-                                    </motion.div>
-                                )}
-                            </form>
+                                    {status === "error" && (
+                                        <motion.div
+                                            initial={{ opacity: 0, y: 10 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            className="p-3.5 bg-red-500/5 border border-red-500/10 text-red-400 rounded-xl text-xs text-center"
+                                        >
+                                            Something went wrong. Please try again later.
+                                        </motion.div>
+                                    )}
+                                </form>
+                            ) : (
+                                <div className="space-y-5">
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                        <div className="h-[68px] bg-zinc-800/30 rounded-xl animate-pulse" />
+                                        <div className="h-[68px] bg-zinc-800/30 rounded-xl animate-pulse" />
+                                    </div>
+                                    <div className="h-[68px] bg-zinc-800/30 rounded-xl animate-pulse" />
+                                    <div className="h-[120px] bg-zinc-800/30 rounded-xl animate-pulse" />
+                                    <div className="h-[52px] bg-zinc-800/30 rounded-xl animate-pulse" />
+                                </div>
+                            )}
                         </div>
                     </motion.div>
                 </div>
