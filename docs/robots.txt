@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://sid1125.github.io/sid-portfolio/sitemap.xml
