@@ -25,67 +25,172 @@ export const HERO = {
 export const PROJECTS = [
     {
         title: "Project ARGUS",
-        description: "Full-stack telecom forensics platform for CDR/IPDR investigation with FastAPI, SQLAlchemy, Pandas, NetworkX, D3.js, and Leaflet. Features network graphs, tower movement maps, timelines, cross-subject correlation, and court-ready dossier export. Includes spatiotemporal inference modules for risk scoring, impossible travel detection, and offline-first AI insights via Ollama/LoRA.",
+        description: "Full-stack telecom forensics platform for CDR/IPDR investigation with FastAPI, SQLAlchemy, Pandas, NetworkX, D3.js, and Leaflet. Features network graphs, tower movement maps, timelines, cross-subject correlation, and court-ready dossier export.",
+        details: "A comprehensive telecom forensics investigation platform designed for law enforcement and cybersecurity analysts. ARGUS ingests Call Detail Records (CDR) and IP Detail Records (IPDR) to reconstruct communication patterns, visualize network relationships, and detect suspicious activity through spatiotemporal analysis. The platform generates court-admissible dossier exports and leverages local AI models for offline deployment in sensitive environments.",
         image: "./ARGUS.jpg",
-        tags: ["FastAPI", "Python", "NetworkX", "D3.js", "Forensics"],
-        link: "https://github.com/sid1125",
-        linkText: "View Code"
+        tags: ["Telecom Forensics", "CDR/IPDR", "Analytics"],
+        features: [
+            "Interactive network graphs with D3.js force-directed layouts showing call/subscriber relationships",
+            "Tower movement maps with Leaflet for geospatial tracking and timeline playback",
+            "Cross-subject correlation engine linking disparate CDR records to common entities",
+            "Spatiotemporal inference modules for risk scoring and impossible travel detection",
+            "Offline-first AI insights via Ollama/LoRA for air-gapped environments",
+            "Court-ready dossier export with chain-of-custody metadata"
+        ],
+        techStack: ["FastAPI", "Python", "SQLAlchemy", "Pandas", "NetworkX", "D3.js", "Leaflet", "Ollama", "LoRA", "PostgreSQL"],
+        link: "https://github.com/sid1125/tifm-cdr-ipdr-visualizer",
+        linkText: "View Code",
+        links: [
+            { label: "GitHub", url: "https://github.com/sid1125/tifm-cdr-ipdr-visualizer" }
+        ]
     },
     {
         title: "Project SENTINEL (WIP)",
         description: "AI-powered network threat intelligence and monitoring platform with real-time network discovery, ARP scanning, Nmap-based enumeration, and local CVE intelligence engine. Features a natural language control layer using local LLMs and a modular SOC-style architecture designed for offline-first deployment.",
+        details: "A next-generation network security monitoring platform that combines traditional network scanning tools with AI-powered analysis. SENTINEL provides real-time network discovery, vulnerability assessment, and natural language querying of network state. The modular SOC-style architecture allows security teams to deploy it in air-gapped environments without external dependencies, making it ideal for sensitive or classified network infrastructures.",
         image: "",
-        tags: ["FastAPI", "React", "WebSockets", "AI", "Cybersecurity"],
+        tags: ["Network Security", "AI", "SOC"],
+        features: [
+            "Real-time network discovery with ARP scanning and Nmap-based enumeration",
+            "Local CVE intelligence engine with automated vulnerability matching",
+            "Natural language control layer using local LLMs for querying network state",
+            "Modular SOC-style dashboard with real-time WebSocket updates",
+            "Offline-first deployment with no external API dependencies",
+            "Automated alerting and threat severity scoring"
+        ],
+        techStack: ["FastAPI", "React", "WebSockets", "Ollama", "Nmap", "Python", "SQLite", "Docker"],
         link: "https://github.com/Sid1125/Project-SENTINEL",
-        linkText: "View Code"
+        linkText: "View Code",
+        links: [
+            { label: "GitHub", url: "https://github.com/Sid1125/Project-SENTINEL" }
+        ]
     },
     {
         title: "AgentRecon",
         description: "Automated reconnaissance and vulnerability analysis pipeline integrating Nmap, Masscan, Nikto, Gobuster, and SSLyze. Features custom CVE enrichment from NVD and AlienVault OTX, with AI-driven false positive filtering for improved signal accuracy.",
+        details: "An intelligent reconnaissance automation framework that orchestrates multiple industry-standard scanning tools through a unified pipeline. AgentRecon goes beyond simple tool orchestration by enriching findings with real-time CVE data from NVD and AlienVault OTX, then applying machine learning to filter false positives. The result is a prioritized, actionable vulnerability report that saves hours of manual analysis.",
         image: "./agent-recon.png",
-        tags: ["Python", "AI", "Nmap", "Automation", "Security"],
+        tags: ["Recon", "Automation", "Vulnerability"],
+        features: [
+            "Orchestrated scanning pipeline with Nmap, Masscan, Nikto, Gobuster, SSLyze",
+            "Real-time CVE enrichment from NVD and AlienVault OTX threat feeds",
+            "AI-driven false positive filtering using supervised classification models",
+            "Automated report generation with severity-based prioritization",
+            "Modular plugin architecture for adding custom scanners",
+            "Parallel execution engine for faster comprehensive scans"
+        ],
+        techStack: ["Python", "Nmap", "Masscan", "Scikit-learn", "NVD API", "AlienVault OTX", "Docker"],
         link: "https://github.com/sid1125/AgentRecon",
-        linkText: "View Code"
+        linkText: "View Code",
+        links: [
+            { label: "GitHub", url: "https://github.com/sid1125/AgentRecon" }
+        ]
     },
     {
         title: "AI Research Agent",
         description: "Retrieval-Augmented Generation pipeline for private PDF question answering. Features a custom Siamese BiLSTM embedding model in Keras, hybrid dense + TF-IDF retrieval, and grounded answer generation with extractive fallback for low-resource settings.",
+        details: "A specialized RAG system designed for research environments where data privacy is paramount. Unlike cloud-based solutions, this agent processes sensitive PDF documents entirely on local hardware. It uses a custom-trained Siamese BiLSTM network for generating document embeddings, combined with TF-IDF for hybrid retrieval that balances semantic understanding with keyword precision. The extractive fallback mechanism ensures answers are always grounded in source material, even when generative models are uncertain.",
         image: "",
-        tags: ["Python", "NLP", "LLM", "RAG", "Keras"],
+        tags: ["RAG", "NLP", "Research"],
+        features: [
+            "Custom Siamese BiLSTM embedding model trained in Keras for domain-specific understanding",
+            "Hybrid retrieval combining dense embeddings with TF-IDF sparse retrieval",
+            "Grounded answer generation with confidence scoring",
+            "Extractive fallback for low-confidence predictions — never hallucinates",
+            "Full offline operation — no external API calls or data leaks",
+            "Streamlit-based UI for interactive document querying"
+        ],
+        techStack: ["Python", "Keras", "TensorFlow", "TF-IDF", "Streamlit", "Sentence-Transformers", "FastAPI"],
         link: "https://github.com/Sid1125/Primitive-Research-RAG",
-        linkText: "View Code"
+        linkText: "View Code",
+        links: [
+            { label: "GitHub", url: "https://github.com/Sid1125/Primitive-Research-RAG" }
+        ]
     },
     {
         title: "F1 Insight Platform",
         description: "Analytics platform for Formula 1 telemetry and race data using FastAPI, Streamlit, and SQLAlchemy with XGBoost predictive models for race outcomes. Includes strategy simulation for pit-stop timing and tyre management, plus an AI-powered natural language interface.",
+        details: "A data-intensive sports analytics platform that transforms raw Formula 1 telemetry into actionable race intelligence. F1 Insight uses XGBoost regression models trained on historical race data to predict finishing positions, optimal pit-stop windows, and tyre degradation curves. The natural language interface allows users to ask questions like 'What if Hamilton pits on lap 25?' and receive simulated outcomes with confidence intervals.",
         image: "",
-        tags: ["FastAPI", "Streamlit", "XGBoost", "AI", "Data Science"],
+        tags: ["Sports Analytics", "ML", "Data Viz"],
+        features: [
+            "XGBoost predictive models for race outcome forecasting with confidence intervals",
+            "Strategy simulation engine for pit-stop timing, tyre management, and fuel load",
+            "AI-powered natural language interface for ad-hoc race queries",
+            "Interactive telemetry visualizations with lap-by-lap comparison",
+            "Historical data pipeline ingesting Ergast API and FastF1 data sources",
+            "Driver and constructor performance trend analysis across seasons"
+        ],
+        techStack: ["FastAPI", "Streamlit", "SQLAlchemy", "XGBoost", "Python", "Pandas", "Plotly", "FastF1"],
         link: "https://github.com/Sid1125/F1-Insight",
-        linkText: "View Code"
+        linkText: "View Code",
+        links: [
+            { label: "GitHub", url: "https://github.com/Sid1125/F1-Insight" }
+        ]
     },
     {
         title: "HITMEN",
         description: "Community-driven moderation and harmful content tracking platform leveraging crowdsourced inputs and structured reporting. Integrates Discord API for dynamic entity fetching with automated status verification and real-time state transitions.",
+        details: "A community safety platform that harnesses crowdsourced intelligence to track and mitigate harmful online content. HITMEN integrates with Discord's API to automatically fetch and verify reported entities, maintaining a real-time state machine for tracking moderation actions from report through resolution. The structured reporting system provides transparency and accountability in community moderation workflows.",
         image: "./Hitmen.png.jpg",
-        tags: ["Web", "Discord API", "TailwindCSS", "Moderation"],
+        tags: ["Moderation", "Discord", "Community"],
+        features: [
+            "Crowdsourced harmful content reporting with structured evidence collection",
+            "Discord API integration for automated entity fetching and status verification",
+            "Real-time state machine tracking moderation lifecycle: report → review → action → resolution",
+            "Community dashboard showing active cases, resolved reports, and moderator activity",
+            "Automated notifications and escalation workflows for urgent reports",
+            "Anonymous reporting with optional identity verification for moderators"
+        ],
+        techStack: ["HTML", "CSS", "JavaScript", "Discord API", "TailwindCSS", "Node.js"],
         link: "https://sid1125.github.io/hitmen_epi_prevention/",
-        linkText: "View Live"
+        linkText: "View Live",
+        links: [
+            { label: "Live Site", url: "https://sid1125.github.io/hitmen_epi_prevention/" },
+            { label: "GitHub", url: "https://github.com/Sid1125/hitmen_epi_prevention" }
+        ]
     },
     {
         title: "Innovathon Platform",
         description: "Full-stack hackathon management and event platform with structured sections for overview, sponsors, competition tracks, timelines, and FAQs. Designed with a visually rich, futuristic UI and component-driven layout architecture.",
+        details: "A comprehensive event management platform built for college-level hackathons. The Innovathon Platform provides everything needed to run a successful coding competition: sponsor showcase, competition track descriptions with judging criteria, real-time timeline management, FAQ sections, and team registration. The futuristic UI design uses glassmorphism and animated transitions to create an engaging experience that reflects the innovative spirit of the event.",
         image: "./Innovathon.jpg",
-        tags: ["HTML", "CSS", "JavaScript", "UI/UX"],
+        tags: ["Event Platform", "UI/UX", "Hackathon"],
+        features: [
+            "Multi-section landing page with hero, sponsors, tracks, timeline, FAQ",
+            "Component-driven architecture for easy content updates and theming",
+            "Responsive design with glassmorphism and animated transitions",
+            "Team registration flow with skill-based team matching",
+            "Real-time hackathon timeline with countdown and milestone tracking",
+            "Judge dashboard for submission review and scoring"
+        ],
+        techStack: ["HTML", "CSS", "JavaScript", "React", "TailwindCSS", "Vite"],
         link: "https://innovathon2.onrender.com",
-        linkText: "View Live"
+        linkText: "View Live",
+        links: [
+            { label: "Live Site", url: "https://innovathon2.onrender.com" }
+        ]
     },
     {
         title: "OIA International Hub",
         description: "Web platform for international academic collaboration featuring program highlights, partner universities, student mobility initiatives, and institutional outreach. Built with responsive multi-section content architecture for the Office of International Affairs at Amity University.",
+        details: "A professional web platform developed for the Office of International Affairs at Amity University to showcase global academic partnerships and student mobility programs. The hub features comprehensive program listings, partner university profiles with geographic mapping, student testimonial carousels, and an integrated inquiry system. The responsive multi-section architecture ensures a seamless experience across devices for prospective international students and partner institutions worldwide.",
         image: "./OIA.jpg",
-        tags: ["React", "Next.js", "UI/UX", "Responsive"],
+        tags: ["Education", "International", "Next.js"],
+        features: [
+            "Program highlights and partner university profiles with geographic mapping",
+            "Student mobility initiative listings with eligibility and application details",
+            "Institutional outreach section with downloadable resources and contacts",
+            "Testimonial carousel featuring student experiences from partner universities",
+            "Responsive design spanning desktop to mobile for global accessibility",
+            "Integrated inquiry and contact form for prospective students"
+        ],
+        techStack: ["React", "Next.js", "TailwindCSS", "JavaScript", "CSS"],
         link: "https://global-connect-hub-two.vercel.app/",
-        linkText: "View Live"
+        linkText: "View Live",
+        links: [
+            { label: "Live Site", url: "https://global-connect-hub-two.vercel.app/" }
+        ]
     }
 ];
 
