@@ -3,7 +3,7 @@ import { Blog } from "@/components/sections/Blog";
 
 export default function BlogPage() {
     return (
-        <main className="min-h-screen bg-black text-white selection:bg-red-500/30">
+        <main className="min-h-screen bg-black text-white selection:bg-red-500/30" id="main-content">
             <Navigation />
             <div className="pt-20">
                 <Blog />

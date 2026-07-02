@@ -42,7 +42,7 @@ export const PROJECTS = [
     {
         title: "AgentRecon",
         description: "Automated reconnaissance and vulnerability analysis pipeline integrating Nmap, Masscan, Nikto, Gobuster, and SSLyze. Features custom CVE enrichment from NVD and AlienVault OTX, with AI-driven false positive filtering for improved signal accuracy.",
-        image: "/sid-portfolio/agent-recon.png",
+        image: "/agent-recon.png",
         tags: ["Python", "AI", "Nmap", "Automation", "Security"],
         link: "https://github.com/sid1125/AgentRecon",
         linkText: "View Code"

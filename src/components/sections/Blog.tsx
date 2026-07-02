@@ -50,8 +50,12 @@ export const Blog = () => {
                             viewport={{ once: true }}
                         >
                             <div
+                                role="button"
+                                tabIndex={0}
+                                aria-expanded={selectedPost?.title === post.title}
                                 className="group bg-zinc-900/20 backdrop-blur-sm border border-white/5 rounded-2xl overflow-hidden hover:border-white/10 transition-all duration-500 cursor-pointer h-full"
                                 onClick={() => setSelectedPost(post)}
+                                onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setSelectedPost(post); } }}
                             >
                                 <div className="p-6 h-full flex flex-col">
                                     <div className="flex items-center gap-3 text-[11px] text-zinc-500 mb-4">

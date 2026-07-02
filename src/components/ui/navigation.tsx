@@ -48,6 +48,7 @@ export const Navigation = () => {
 
     return (
         <nav
+            aria-label="Main navigation"
             className={cn(
                 "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
                 scrolled
@@ -112,7 +113,8 @@ export const Navigation = () => {
                 <button
                     onClick={() => setMobileOpen(!mobileOpen)}
                     className="lg:hidden p-2 text-zinc-400 hover:text-white transition-colors"
-                    aria-label="Toggle menu"
+                    aria-label={mobileOpen ? "Close menu" : "Open menu"}
+                    aria-expanded={mobileOpen}
                 >
                     {mobileOpen ? <X size={20} /> : <Menu size={20} />}
                 </button>

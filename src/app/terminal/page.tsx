@@ -3,7 +3,7 @@ import { Terminal } from "@/components/sections/Terminal";
 
 export default function TerminalPage() {
     return (
-        <main className="h-screen flex flex-col overflow-hidden bg-black text-white selection:bg-red-500/30">
+        <main className="h-screen flex flex-col overflow-hidden bg-black text-white selection:bg-red-500/30" id="main-content">
             <Navigation />
             <div className="flex-1 flex flex-col min-h-0 pt-20">
                 <Terminal className="flex-1 h-full" />

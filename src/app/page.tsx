@@ -8,7 +8,7 @@ import { Contact } from "@/components/sections/Contact";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-black text-white selection:bg-red-500/30 overflow-x-hidden">
+    <main className="min-h-screen bg-black text-white selection:bg-red-500/30 overflow-x-hidden" id="main-content">
       <Navigation />
 
       {/* Editorial Hero Section with Clipping Strategy */}

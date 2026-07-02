@@ -169,7 +169,7 @@ export const Contact = () => {
                                         href={href}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        title={label}
+                                        aria-label={label}
                                         className="w-9 h-9 bg-zinc-800/50 rounded-lg border border-white/5 flex items-center justify-center text-zinc-400 hover:text-white hover:border-primary/30 hover:bg-primary/[0.08] hover:-translate-y-0.5 transition-all duration-300"
                                     >
                                         <Icon size={15} />
@@ -277,10 +277,11 @@ export const Contact = () => {
 
 const InputField = ({ label, ...props }: React.ComponentPropsWithoutRef<"input"> & { label: string }) => {
     const [focused, setFocused] = useState(false);
+    const fieldId = props.name || label.toLowerCase().replace(/\s+/g, "_");
 
     return (
         <div className="space-y-1.5 relative">
-            <label className="text-[11px] font-medium text-zinc-500 uppercase tracking-wider">{label}</label>
+            <label htmlFor={fieldId} className="text-[11px] font-medium text-zinc-500 uppercase tracking-wider">{label}</label>
             <div className="relative">
                 <div
                     className={`absolute inset-0 rounded-xl transition-opacity duration-300 pointer-events-none ${
@@ -292,6 +293,7 @@ const InputField = ({ label, ...props }: React.ComponentPropsWithoutRef<"input">
                     }}
                 />
                 <input
+                    id={fieldId}
                     {...props}
                     onFocus={(e) => { setFocused(true); props.onFocus?.(e); }}
                     onBlur={(e) => { setFocused(false); props.onBlur?.(e); }}
@@ -304,10 +306,11 @@ const InputField = ({ label, ...props }: React.ComponentPropsWithoutRef<"input">
 
 const TextAreaField = ({ label, ...props }: React.ComponentPropsWithoutRef<"textarea"> & { label: string }) => {
     const [focused, setFocused] = useState(false);
+    const fieldId = props.name || label.toLowerCase().replace(/\s+/g, "_");
 
     return (
         <div className="space-y-1.5 relative">
-            <label className="text-[11px] font-medium text-zinc-500 uppercase tracking-wider">{label}</label>
+            <label htmlFor={fieldId} className="text-[11px] font-medium text-zinc-500 uppercase tracking-wider">{label}</label>
             <div className="relative">
                 <div
                     className={`absolute inset-0 rounded-xl transition-opacity duration-300 pointer-events-none ${
@@ -319,6 +322,7 @@ const TextAreaField = ({ label, ...props }: React.ComponentPropsWithoutRef<"text
                     }}
                 />
                 <textarea
+                    id={fieldId}
                     {...props}
                     onFocus={(e) => { setFocused(true); props.onFocus?.(e); }}
                     onBlur={(e) => { setFocused(false); props.onBlur?.(e); }}

@@ -4,14 +4,12 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && mv out docs",
+    "build": "next build && PowerShell -Command \"if (Test-Path docs) { Remove-Item -Recurse -Force docs }; Move-Item -Path out -Destination docs\"",
     "start": "next start",
     "lint": "eslint"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
-    "@splinetool/react-spline": "^4.1.0",
-    "@splinetool/runtime": "^1.12.39",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "framer-motion": "^12.28.1",
