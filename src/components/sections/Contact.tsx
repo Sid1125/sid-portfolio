@@ -197,7 +197,7 @@ export const Contact = () => {
                         className="lg:col-span-3"
                     >
                         <div className="bg-zinc-900/20 backdrop-blur-sm p-8 rounded-2xl border border-white/5">
-                            <form ref={formRef} onSubmit={handleSubmit} className="space-y-5">
+                            <form ref={formRef} onSubmit={handleSubmit} className="space-y-5" suppressHydrationWarning>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                                     <InputField
                                         label="Name"
