@@ -13,10 +13,7 @@ export default function Home() {
 
       {/* Editorial Hero Section with Clipping Strategy */}
       <section id="home" className="relative min-h-[70vh] flex items-center overflow-hidden">
-        <div className="absolute inset-0 pointer-events-none z-[1] opacity-30" style={{
-          backgroundImage: "radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px)",
-          backgroundSize: "40px 40px",
-        }} />
+        <div className="absolute inset-0 pointer-events-none z-[1] opacity-30 dot-grid" />
         {/* Immersive Background Animation with Clipping */}
         <div className="absolute inset-x-0 top-0 bottom-20 z-0 overflow-hidden pointer-events-none will-change-transform bg-gradient-to-b from-zinc-950 via-black to-black">
           <UnicornStudio
@@ -91,13 +88,7 @@ export default function Home() {
       <Contact />
 
       <footer className="py-16 border-t border-white/5 text-center bg-black relative z-10">
-        <div
-          className="absolute inset-0 pointer-events-none opacity-10"
-          style={{
-            backgroundImage: "radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px)",
-            backgroundSize: "40px 40px",
-          }}
-        />
+        <div className="absolute inset-0 pointer-events-none opacity-10 dot-grid" />
         <div className="container mx-auto px-6 relative z-10">
           <div className="w-8 h-[1.5px] bg-primary/40 mx-auto mb-8" />
           <p className="text-sm text-zinc-500 mb-2">© {new Date().getFullYear()} Siddharth Sinha</p>

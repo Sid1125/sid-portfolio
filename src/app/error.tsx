@@ -9,14 +9,7 @@ export default function Error({
 }) {
   return (
     <main className="min-h-screen bg-black text-white selection:bg-red-500/30 flex flex-col items-center justify-center px-6 relative overflow-hidden" id="main-content">
-      <div
-        className="absolute inset-0 pointer-events-none opacity-20"
-        style={{
-          backgroundImage:
-            "radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px)",
-          backgroundSize: "40px 40px",
-        }}
-      />
+      <div className="absolute inset-0 pointer-events-none opacity-20 dot-grid" />
 
       <div className="relative z-10 text-center">
         <p className="font-mono text-xs text-primary/60 tracking-[0.2em] mb-4">

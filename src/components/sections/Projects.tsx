@@ -26,13 +26,7 @@ export const Projects = () => {
     return (
         <section id="projects" className="py-32 bg-black relative overflow-hidden">
             <GradientMesh />
-            <div
-                className="absolute inset-0 pointer-events-none opacity-30"
-                style={{
-                    backgroundImage: "radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px)",
-                    backgroundSize: "60px 60px",
-                }}
-            />
+            <div className="absolute inset-0 pointer-events-none opacity-30 dot-grid-sm" />
             <div className="container mx-auto px-6 relative z-10">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
