@@ -1,4 +1,6 @@
 import { Navigation } from "@/components/ui/navigation";
+import { Spotlight } from "@/components/ui/spotlight";
+import { UnicornStudio } from "@/components/ui/unicorn-studio";
 import { Projects } from "@/components/sections/Projects";
 import { Skills } from "@/components/sections/Skills";
 import { Experience } from "@/components/sections/Experience";
@@ -12,13 +14,18 @@ export default function Home() {
       {/* Hero Section */}
       <section id="home" className="relative min-h-[70vh] flex items-center overflow-hidden">
         <div className="absolute inset-0 pointer-events-none z-[1] opacity-30 dot-grid" />
-        {/* Animated Background */}
+        {/* Animated Background — UnicornStudio on desktop, CSS fallback on mobile */}
         <div className="absolute inset-x-0 top-0 bottom-20 z-0 overflow-hidden pointer-events-none bg-gradient-to-b from-zinc-950 via-black to-black">
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_10%_20%,rgba(255,0,0,0.06)_0%,transparent_60%),radial-gradient(ellipse_60%_50%_at_90%_80%,rgba(255,0,0,0.04)_0%,transparent_60%),radial-gradient(ellipse_50%_40%_at_50%_50%,rgba(100,0,0,0.03)_0%,transparent_50%)] animate-[heroDrift_30s_ease-in-out_infinite]" />
+          <UnicornStudio
+            projectId="cmbQxPyy8Ts7q2LBBDz1"
+            className="w-full h-full object-cover scale-[1.15] translate-y-[-3%]"
+          />
           <div className="absolute inset-0 bg-gradient-to-r from-black via-black/40 to-transparent z-10" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_50%,rgba(255,0,0,0.1)_0%,transparent_50%)] z-10" />
           <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/20 z-10" />
         </div>
+
+        <Spotlight className="-top-40 left-0 md:left-[10%] md:-top-20 z-20" size={800} />
 
         <div className="container mx-auto px-6 relative z-30 w-full mt-20">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-end">

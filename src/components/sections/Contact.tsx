@@ -280,7 +280,7 @@ const InputField = ({ label, ...props }: React.ComponentPropsWithoutRef<"input">
     return (
         <div className="space-y-1.5 relative">
             <label htmlFor={fieldId} className="text-[11px] font-medium text-zinc-500 uppercase tracking-wider">{label}</label>
-            <div className="relative">
+            <div className="relative" suppressHydrationWarning>
                 <div
                     className={`absolute inset-0 rounded-xl transition-opacity duration-300 pointer-events-none ${
                         focused ? "opacity-100" : "opacity-0"
@@ -309,7 +309,7 @@ const TextAreaField = ({ label, ...props }: React.ComponentPropsWithoutRef<"text
     return (
         <div className="space-y-1.5 relative">
             <label htmlFor={fieldId} className="text-[11px] font-medium text-zinc-500 uppercase tracking-wider">{label}</label>
-            <div className="relative">
+            <div className="relative" suppressHydrationWarning>
                 <div
                     className={`absolute inset-0 rounded-xl transition-opacity duration-300 pointer-events-none ${
                         focused ? "opacity-100" : "opacity-0"
