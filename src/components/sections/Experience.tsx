@@ -3,12 +3,10 @@ import React from "react";
 import { EXPERIENCE, EDUCATION, ACHIEVEMENTS, CERTIFICATIONS, LANGUAGES } from "@/constants";
 import { motion } from "framer-motion";
 import { Briefcase, GraduationCap, Award, Shield, Globe } from "lucide-react";
-import { GradientMesh } from "@/components/ui/gradient-mesh";
 
 export const Experience = () => {
     return (
         <section id="experience" className="py-32 bg-black relative overflow-hidden">
-            <GradientMesh />
             <div className="absolute inset-0 pointer-events-none opacity-20 dot-grid-sm" />
             <div className="container mx-auto px-6 relative z-10">
                 <motion.div
@@ -64,7 +62,7 @@ export const Experience = () => {
                                             <motion.div
                                                 initial={{ scale: 0 }}
                                                 whileInView={{ scale: 1 }}
-                                                transition={{ type: "spring" as const, damping: 10, stiffness: 200, delay: index * 0.1 }}
+                                                transition={{ ease: "easeOut", duration: 0.4, delay: index * 0.1 }}
                                                 viewport={{ once: true }}
                                                 className="w-[10px] h-[10px] bg-primary rounded-full relative"
                                             >
@@ -118,7 +116,7 @@ export const Experience = () => {
                                             <motion.div
                                                 initial={{ scale: 0 }}
                                                 whileInView={{ scale: 1 }}
-                                                transition={{ type: "spring" as const, damping: 10, stiffness: 200, delay: index * 0.1 }}
+                                                transition={{ ease: "easeOut", duration: 0.4, delay: index * 0.1 }}
                                                 viewport={{ once: true }}
                                                 className="w-[10px] h-[10px] bg-primary rounded-full relative"
                                             >

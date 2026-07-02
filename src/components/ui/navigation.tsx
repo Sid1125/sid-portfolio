@@ -22,22 +22,29 @@ export const Navigation = () => {
     const [activeSection, setActiveSection] = useState("");
 
     useEffect(() => {
+        let ticking = false;
         const handleScroll = () => {
-            setScrolled(window.scrollY > 20);
-
-            const sections = navItems
-                .filter((item) => item.href.startsWith("/#"))
-                .map((item) => item.href.slice(2));
-            for (const id of sections.reverse()) {
-                const el = document.getElementById(id);
-                if (el && el.getBoundingClientRect().top <= 150) {
-                    setActiveSection(id);
-                    return;
-                }
+            if (!ticking) {
+                requestAnimationFrame(() => {
+                    setScrolled(window.scrollY > 20);
+                    const sections = navItems
+                        .filter((item) => item.href.startsWith("/#"))
+                        .map((item) => item.href.slice(2));
+                    for (const id of sections.reverse()) {
+                        const el = document.getElementById(id);
+                        if (el && el.getBoundingClientRect().top <= 150) {
+                            setActiveSection(id);
+                            ticking = false;
+                            return;
+                        }
+                    }
+                    setActiveSection("");
+                    ticking = false;
+                });
+                ticking = true;
             }
-            setActiveSection("");
         };
-        window.addEventListener("scroll", handleScroll);
+        window.addEventListener("scroll", handleScroll, { passive: true });
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
@@ -80,13 +87,13 @@ export const Navigation = () => {
                                 )}
                             >
                                 {item.name}
-                                {isActive && (
-                                    <motion.div
-                                        layoutId="nav-active"
-                                        className="absolute inset-0 bg-white/[0.05] rounded-lg -z-10"
-                                        transition={{ type: "spring" as const, damping: 20, stiffness: 300 }}
-                                    />
-                                )}
+                                    {isActive && (
+                                        <motion.div
+                                            layoutId="nav-active"
+                                            className="absolute inset-0 bg-white/[0.05] rounded-lg -z-10"
+                                            transition={{ duration: 0.2 }}
+                                        />
+                                    )}
                             </Link>
                         );
                     })}

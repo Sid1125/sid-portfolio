@@ -4,7 +4,6 @@ import { SKILLS } from "@/constants";
 import { Card } from "@/components/ui/card";
 import { motion } from "framer-motion";
 import * as Icons from "lucide-react";
-import { GradientMesh } from "@/components/ui/gradient-mesh";
 
 const skillItemVariants = {
     hidden: { opacity: 0, scale: 0 },
@@ -12,18 +11,16 @@ const skillItemVariants = {
         opacity: 1,
         scale: 1,
         transition: {
-            type: "spring" as const,
-            damping: 12,
-            stiffness: 120,
+            ease: "easeOut" as const,
+            duration: 0.3,
             delay: i * 0.04,
-        } as const,
+        },
     }),
 };
 
 export const Skills = () => {
     return (
         <section id="skills" className="py-32 bg-zinc-950/50 relative overflow-hidden">
-            <GradientMesh />
             <div className="container mx-auto px-6 relative z-10">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -66,16 +63,6 @@ export const Skills = () => {
                                     />
 
                                     <div className="mb-5 relative">
-                                        <motion.div
-                                            className="absolute inset-[-8px] rounded-xl border border-primary/[0.06]"
-                                            animate={{ rotate: 360 }}
-                                            transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-                                        />
-                                        <motion.div
-                                            className="absolute inset-[-12px] rounded-xl border border-primary/[0.03]"
-                                            animate={{ rotate: -360 }}
-                                            transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
-                                        />
                                         <div className="relative w-11 h-11 bg-primary/[0.08] rounded-xl flex items-center justify-center text-primary/80 group-hover:bg-primary/[0.15] group-hover:text-primary transition-all duration-500">
                                             {Icon && <Icon size={20} />}
                                         </div>

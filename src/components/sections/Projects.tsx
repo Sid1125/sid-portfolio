@@ -1,11 +1,10 @@
 "use client";
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import { PROJECTS } from "@/constants";
 import { Card } from "@/components/ui/card";
 import { motion, AnimatePresence } from "framer-motion";
 import { ExternalLink, Github, ArrowUpRight, X, CheckCircle2 } from "lucide-react";
-import { GradientMesh } from "@/components/ui/gradient-mesh";
 
 const cardVariants = {
     hidden: { opacity: 0, y: 40, scale: 0.95 },
@@ -14,11 +13,10 @@ const cardVariants = {
         y: 0,
         scale: 1,
         transition: {
-            type: "spring" as const,
-            damping: 20,
-            stiffness: 100,
+            ease: "easeOut" as const,
+            duration: 0.5,
             delay: i * 0.08,
-        } as const,
+        },
     }),
 };
 
@@ -36,7 +34,6 @@ export const Projects = () => {
 
     return (
         <section id="projects" className="py-32 bg-black relative overflow-hidden">
-            <GradientMesh />
             <div className="absolute inset-0 pointer-events-none opacity-30 dot-grid-sm" />
             <div className="container mx-auto px-6 relative z-10">
                 <motion.div
@@ -83,38 +80,56 @@ export const Projects = () => {
     );
 };
 
+const glowCache = new WeakMap<HTMLElement, { x: number; y: number; raf: number }>();
+
 const ProjectCard = ({ project, index, onSelect }: {
     project: typeof PROJECTS[0];
     index: number;
     onSelect: () => void;
 }) => {
     const cardRef = useRef<HTMLDivElement>(null);
-    const [glowPos, setGlowPos] = useState({ x: "50%", y: "50%" });
-    const [isHovered, setIsHovered] = useState(false);
+    const glowRef = useRef<HTMLDivElement>(null);
+    const tiltRef = useRef<HTMLDivElement>(null);
 
-    const handleMouseMove = (e: React.MouseEvent) => {
-        const rect = e.currentTarget.getBoundingClientRect();
-        const x = ((e.clientX - rect.left) / rect.width) * 100;
-        const y = ((e.clientY - rect.top) / rect.height) * 100;
-        setGlowPos({ x: `${x}%`, y: `${y}%` });
-
-        if (cardRef.current) {
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-            const rx = ((e.clientY - rect.top - centerY) / centerY) * -8;
-            const ry = ((e.clientX - rect.left - centerX) / centerX) * 8;
-            cardRef.current.style.setProperty("--rx", `${rx}deg`);
-            cardRef.current.style.setProperty("--ry", `${ry}deg`);
+    const handleMouseMove = useCallback((e: React.MouseEvent) => {
+        const el = e.currentTarget as HTMLElement;
+        let entry = glowCache.get(el);
+        if (!entry) {
+            entry = { x: 50, y: 50, raf: 0 };
+            glowCache.set(el, entry);
         }
-    };
+        const rect = el.getBoundingClientRect();
+        entry.x = ((e.clientX - rect.left) / rect.width) * 100;
+        entry.y = ((e.clientY - rect.top) / rect.height) * 100;
 
-    const handleMouseLeave = () => {
-        setIsHovered(false);
-        if (cardRef.current) {
-            cardRef.current.style.setProperty("--rx", "0deg");
-            cardRef.current.style.setProperty("--ry", "0deg");
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rx = ((e.clientY - rect.top - centerY) / centerY) * -8;
+        const ry = ((e.clientX - rect.left - centerX) / centerX) * 8;
+
+        if (entry.raf) cancelAnimationFrame(entry.raf);
+        entry.raf = requestAnimationFrame(() => {
+            if (glowRef.current) {
+                glowRef.current.style.setProperty("--gx", `${entry!.x}%`);
+                glowRef.current.style.setProperty("--gy", `${entry!.y}%`);
+            }
+            if (tiltRef.current) {
+                tiltRef.current.style.setProperty("--rx", `${rx}deg`);
+                tiltRef.current.style.setProperty("--ry", `${ry}deg`);
+            }
+        });
+    }, []);
+
+    const handleMouseLeave = useCallback(() => {
+        const el = cardRef.current;
+        if (!el) return;
+        const entry = glowCache.get(el);
+        if (entry && entry.raf) cancelAnimationFrame(entry.raf);
+        if (tiltRef.current) {
+            tiltRef.current.style.setProperty("--rx", "0deg");
+            tiltRef.current.style.setProperty("--ry", "0deg");
         }
-    };
+    }, []);
 
     return (
         <motion.div
@@ -125,9 +140,8 @@ const ProjectCard = ({ project, index, onSelect }: {
             viewport={{ once: true }}
         >
             <div
-                ref={cardRef}
+                ref={(node) => { tiltRef.current = node as HTMLDivElement | null; }}
                 onMouseMove={handleMouseMove}
-                onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={handleMouseLeave}
                 onClick={onSelect}
                 onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onSelect(); } }}
@@ -147,11 +161,12 @@ const ProjectCard = ({ project, index, onSelect }: {
                         WebkitMaskImage: "linear-gradient(to bottom, black 0%, transparent 80%)",
                     }}
                 />
-                <Card className="bg-zinc-900/30 backdrop-blur-xl border border-white/5 overflow-hidden hover:border-white/10 transition-all duration-500 flex flex-col h-full rounded-2xl relative">
+                <Card ref={cardRef} className="bg-zinc-900/30 backdrop-blur-xl border border-white/5 overflow-hidden hover:border-white/10 transition-all duration-500 flex flex-col h-full rounded-2xl relative">
                     <div
+                        ref={glowRef}
                         className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-2xl"
                         style={{
-                            background: `radial-gradient(600px circle at ${glowPos.x} ${glowPos.y}, rgba(255,0,0,0.06), transparent 40%)`,
+                            background: "radial-gradient(600px circle at var(--gx, 50%) var(--gy, 50%), rgba(255,0,0,0.06), transparent 40%)",
                         }}
                     />
                     <div className="relative aspect-[16/10] overflow-hidden">

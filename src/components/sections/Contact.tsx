@@ -1,25 +1,40 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useCallback } from "react";
 import emailjs from "@emailjs/browser";
 import { SOCIALS } from "@/constants";
 import { Mail, MapPin, Github, Linkedin, Send, Loader2, Download, Terminal, ArrowUpRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { ParticleGrid } from "@/components/ui/particle-grid";
 
+function useMagnetic<T extends HTMLElement>() {
+    const ref = useRef<T>(null);
+    const rafRef = useRef(0);
+
+    const handleMouseMove = useCallback((e: React.MouseEvent) => {
+        const el = ref.current;
+        if (!el) return;
+        if (rafRef.current) cancelAnimationFrame(rafRef.current);
+        rafRef.current = requestAnimationFrame(() => {
+            const rect = el.getBoundingClientRect();
+            const x = (e.clientX - rect.left - rect.width / 2) * 0.3;
+            const y = (e.clientY - rect.top - rect.height / 2) * 0.3;
+            el.style.transform = `translate(${x}px, ${y}px)`;
+        });
+    }, []);
+
+    const handleMouseLeave = useCallback(() => {
+        const el = ref.current;
+        if (!el) return;
+        if (rafRef.current) cancelAnimationFrame(rafRef.current);
+        el.style.transform = "translate(0px, 0px)";
+    }, []);
+
+    return { ref, handleMouseMove, handleMouseLeave };
+}
+
 const MagneticAnchor = ({ children, className, ...props }: React.ComponentPropsWithoutRef<"a"> & { children: React.ReactNode }) => {
-    const ref = useRef<HTMLAnchorElement>(null);
-    const [pos, setPos] = useState({ x: 0, y: 0 });
-
-    const handleMouseMove = (e: React.MouseEvent) => {
-        if (!ref.current) return;
-        const rect = ref.current.getBoundingClientRect();
-        const x = (e.clientX - rect.left - rect.width / 2) * 0.3;
-        const y = (e.clientY - rect.top - rect.height / 2) * 0.3;
-        setPos({ x, y });
-    };
-
-    const handleMouseLeave = () => setPos({ x: 0, y: 0 });
+    const { ref, handleMouseMove, handleMouseLeave } = useMagnetic<HTMLAnchorElement>();
 
     return (
         <a
@@ -27,10 +42,7 @@ const MagneticAnchor = ({ children, className, ...props }: React.ComponentPropsW
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
             className={className}
-            style={{
-                transform: `translate(${pos.x}px, ${pos.y}px)`,
-                transition: pos.x === 0 && pos.y === 0 ? "transform 0.3s ease" : "none",
-            }}
+            style={{ transform: "translate(0px, 0px)", transition: "transform 0.3s ease" }}
             {...props}
         >
             {children}
@@ -39,18 +51,7 @@ const MagneticAnchor = ({ children, className, ...props }: React.ComponentPropsW
 };
 
 const MagneticButton = ({ children, className, ...props }: React.ComponentPropsWithoutRef<"button"> & { children: React.ReactNode }) => {
-    const ref = useRef<HTMLButtonElement>(null);
-    const [pos, setPos] = useState({ x: 0, y: 0 });
-
-    const handleMouseMove = (e: React.MouseEvent) => {
-        if (!ref.current) return;
-        const rect = ref.current.getBoundingClientRect();
-        const x = (e.clientX - rect.left - rect.width / 2) * 0.3;
-        const y = (e.clientY - rect.top - rect.height / 2) * 0.3;
-        setPos({ x, y });
-    };
-
-    const handleMouseLeave = () => setPos({ x: 0, y: 0 });
+    const { ref, handleMouseMove, handleMouseLeave } = useMagnetic<HTMLButtonElement>();
 
     return (
         <button
@@ -58,10 +59,7 @@ const MagneticButton = ({ children, className, ...props }: React.ComponentPropsW
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
             className={className}
-            style={{
-                transform: `translate(${pos.x}px, ${pos.y}px)`,
-                transition: pos.x === 0 && pos.y === 0 ? "transform 0.3s ease" : "none",
-            }}
+            style={{ transform: "translate(0px, 0px)", transition: "transform 0.3s ease" }}
             {...props}
         >
             {children}
