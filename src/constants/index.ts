@@ -26,7 +26,7 @@ export const PROJECTS = [
     {
         title: "Project ARGUS",
         description: "Full-stack telecom forensics platform for CDR/IPDR investigation with FastAPI, SQLAlchemy, Pandas, NetworkX, D3.js, and Leaflet. Features network graphs, tower movement maps, timelines, cross-subject correlation, and court-ready dossier export. Includes spatiotemporal inference modules for risk scoring, impossible travel detection, and offline-first AI insights via Ollama/LoRA.",
-        image: "",
+        image: "/ARGUS.jpg",
         tags: ["FastAPI", "Python", "NetworkX", "D3.js", "Forensics"],
         link: "https://github.com/sid1125",
         linkText: "View Code"
@@ -66,7 +66,7 @@ export const PROJECTS = [
     {
         title: "HITMEN",
         description: "Community-driven moderation and harmful content tracking platform leveraging crowdsourced inputs and structured reporting. Integrates Discord API for dynamic entity fetching with automated status verification and real-time state transitions.",
-        image: "",
+        image: "/Hitmen.png.jpg",
         tags: ["Web", "Discord API", "TailwindCSS", "Moderation"],
         link: "https://sid1125.github.io/hitmen_epi_prevention/",
         linkText: "View Live"
@@ -74,7 +74,7 @@ export const PROJECTS = [
     {
         title: "Innovathon Platform",
         description: "Full-stack hackathon management and event platform with structured sections for overview, sponsors, competition tracks, timelines, and FAQs. Designed with a visually rich, futuristic UI and component-driven layout architecture.",
-        image: "",
+        image: "/Innovathon.jpg",
         tags: ["HTML", "CSS", "JavaScript", "UI/UX"],
         link: "https://innovathon2.onrender.com",
         linkText: "View Live"
@@ -82,7 +82,7 @@ export const PROJECTS = [
     {
         title: "OIA International Hub",
         description: "Web platform for international academic collaboration featuring program highlights, partner universities, student mobility initiatives, and institutional outreach. Built with responsive multi-section content architecture for the Office of International Affairs at Amity University.",
-        image: "",
+        image: "/OIA.jpg",
         tags: ["React", "Next.js", "UI/UX", "Responsive"],
         link: "https://global-connect-hub-two.vercel.app/",
         linkText: "View Live"
